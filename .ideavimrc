@@ -1,0 +1,35 @@
+" Set leader button to comma
+let mapleader =" "
+
+" Enable relative numbers
+set number relativenumber
+
+" Shortcutting split navigation, saving a keypress:
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" Save file
+map <leader>w :w<cr>
+
+" Save and close file
+map <leader>x :x<cr>
+
+" Keep editor centered vertically
+set scrolloff=9999
+
+" Enable emulated plugins
+set surround
+set commentary
+set multiple-cursors
+set exchange
+
+" Enable incremental search
+set incsearch
+
+" Jump to next change
+map <leader>n <Action>(VcsShowNextChangeMarker)
+
+" Jump to previous change
+map <leader>p <Action>(VcsShowPrevChangeMarker)

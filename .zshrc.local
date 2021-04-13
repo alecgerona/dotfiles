@@ -1,0 +1,70 @@
+zmodload zsh/complist
+
+# Enable NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Add `yarn` to `PATH`
+export PATH="$PATH:$(yarn global bin)"
+
+# Enable zsh vim mode
+bindkey -v
+
+# Hasten key timeout 
+export KEYTIMEOUT=1
+
+# Enable zsh autosuggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+# Use vim keys traversing history the smart way:
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^[[A" history-beginning-search-backward-end
+bindkey "^[[B" history-beginning-search-forward-end
+bindkey -M vicmd 'k' history-beginning-search-backward-end
+bindkey -M vicmd 'j' history-beginning-search-forward-end
+
+fpath=(~/.zsh/completion $fpath)
+
+# Use `fzf` with rg that respects source control and hidden files
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+
+# Use `<C-t>` to open files with vim with rg that respects source control and hidden files
+export FZF_CTRL_T_COMMAND='rg --files --no-ignore-vcs --hidden'
+
+# Enable fzf default key bindings
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+
+# Enable fzf default completion for zsh
+source /usr/share/doc/fzf/examples/completion.zsh
+
+# Enable syntax highlighting
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Enable aliases
+source $HOME/.zsh/aliases
+
+
