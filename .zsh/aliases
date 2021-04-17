@@ -1,1 +1,2 @@
 alias git-dotfiles='/usr/bin/git --git-dir=/home/alecgerona/.cfg/ --work-tree=/home/alecgerona'
+alias gdf=git-dotfiles

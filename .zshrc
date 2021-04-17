@@ -20,3 +20,7 @@ source .zshrc.local
 fpath=($fpath "/home/alecgerona/.zfunctions")
 autoload -U promptinit; promptinit
 prompt spaceship
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true

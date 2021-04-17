@@ -4,12 +4,6 @@ let mapleader =" "
 " Enable relative numbers
 set number relativenumber
 
-" Shortcutting split navigation, saving a keypress:
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-
 " Save file
 map <leader>w :w<cr>
 
